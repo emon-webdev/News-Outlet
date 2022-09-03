@@ -4,30 +4,49 @@ const loadNewsCategory = async () => {
         const res = await fetch(url);
         const data = await res.json();
         displayNewsCategory(data.data.news_category)
-
     } catch (error) {
         console.error(error)
     }
 }
 
 
-const displayNewsCategory = (newsItems) => {
-    console.log(newsItems)
+const displayNewsCategory = (newsCategory) => {
     const menuCategory = document.getElementById('menu-category');
     
-    newsItems.forEach(newsItem => {
-        console.log(newsItem)
+    newsCategory.forEach(newsCategoryName => {
+        // console.log(newsItem)
         const li = document.createElement('li');
         li.classList.add('li-list')
         li.innerHTML = `
-            <a>${newsItem.category_name}</a>
+            <a onclick="loadSingeNews('${newsCategoryName.category_id}')"
+             class="">${newsCategoryName.category_name}</a>
         `
         menuCategory.appendChild(li)
-        
     })
-    
+};
+
+
+const loadSingeNews = async (categoryId) => {
+    const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`;
+      try{
+        const res = await fetch(url);
+        const data = await res.json();
+        displayNews(data.data)
+    }catch(error){
+        console.error(error)
+    }
+};
+
+
+const displayNews = (newsInfo) => {
+    console.log(newsInfo)
     
 };
+
+
+
+
+
 
 
 loadNewsCategory()
