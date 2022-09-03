@@ -11,6 +11,9 @@ const loadNewsCategory = async () => {
 
 
 const displayNewsCategory = (newsCategory) => {
+    //start spinner
+    toggleSpinner(true)
+
     const menuCategory = document.getElementById('menu-category');
     loadSingeNews(newsCategory[7].category_id)
     newsCategory.forEach(newsCategoryName => {
@@ -86,12 +89,13 @@ const displayNews = (newsInfos) => {
             newsContainer.appendChild(div)
         })
         // step loader
-
+        toggleSpinner(false)
 };
 
 
 // load news details id/ url
 const showNewsDetails = async (newsId) => {
+    toggleSpinner(true)
     const url = ` https://openapi.programming-hero.com/api/news/${newsId}`
     try {
         const res = await fetch(url);
@@ -132,11 +136,20 @@ const NewsDetailsModal = (newsDetail) => {
                 </div>
             </div>
     `
-
+    toggleSpinner(false)
 
 };
 
 
+const toggleSpinner = (isLoading) => {
+    const spinnerSection = document.getElementById('spinner');
+    if(isLoading){
+        spinnerSection.classList.remove('hidden')
+    }else{
+        spinnerSection.classList.add('hidden')
+    }
+    
+};
 
 
 
