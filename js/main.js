@@ -39,11 +39,17 @@ const loadSingeNews = async (categoryId) => {
 
 
 const displayNews = (newsInfos) => {
+    const totalNews = document.getElementById('total-news');
+    totalNews.innerHTML = `
+    <p" class="text-[18px] font-[500]">${newsInfos.length} items found for category Entertainment</p>
+    `
+    
+    console.log()
+    
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
     newsInfos.forEach(newsInfo => {
-        const { thumbnail_url, title, details, author, total_view, rating } = newsInfo;
-        console.log(newsInfo)
+        const { thumbnail_url, _id, title, details, author, total_view, rating } = newsInfo;
         const div = document.createElement('div');
         div.innerHTML = `
             <div class="card card-side items-center bg-base-100 shadow-xl mt-4 mb-4">
@@ -55,18 +61,20 @@ const displayNews = (newsInfos) => {
                         <div class="author flex items-center">
                             <img class="w-[40px] h-[40px] rounded-full mr-2.5" src=${author.img} alt="Movie">
                             <div>
-                            <h5>${author.name}</h5>
+                            <h5>${author.name ? author.name : 'Not Found'}</h5>
                             <p><small>${author.published_date}</small></p>
                             </div>
                         </div>
                         <div className="views">
-                        <h4>View: {${total_view}}</h4>
+                        <h4>View: ${total_view ? total_view : 'Not Found'}</h4>
                         </div>
                         <div className="rating">
                         <p>Rating: ${rating.number}</p>
                         </div>
-                        <img class="w-[20px] h-[18px] rounded-full mr-2.5" src="../images/arrow.png" alt="Movie">
+                        <label onclick="showNewsDetails('${_id}')" for="my-modal-3" class="btn btn-primary modal-button">See Details</label>
+                        
                     </div>
+                    
                 </div>
             </div>
         `
@@ -75,6 +83,52 @@ const displayNews = (newsInfos) => {
 };
 
 
+// load news details id/ url
+const showNewsDetails = async (newsId) => {
+    const url = ` https://openapi.programming-hero.com/api/news/${newsId}`
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        NewsDetailsModal(data.data[0])
+    } catch (error) {
+        console.error(error)
+    }
+};
+
+// show nes details info on ui/display
+const NewsDetailsModal = (newsDetail) => {
+    const { thumbnail_url, _id, title, details, author, total_view, rating } = newsDetail;
+
+    const modalBody = document.getElementById('modal-body');
+    console.log(newsDetail)
+    modalBody.innerHTML = `
+        <div class="card card-side items-center bg-base-100 shadow-xl mt-4 mb-4">
+                <div class="card-body">
+                <h2 class="card-title">${title}</h2>
+                <figure><img class="detail-img" src=${thumbnail_url} alt="Movie"></figure>
+                    <p>${details.slice(0, 300)} ...</p>
+                    <div class="card-footer pt-3">
+                        <div class="author flex items-center">
+                            <img class="w-[40px] h-[40px] rounded-full mr-2.5" src=${author.img} alt="Movie">
+                            <div>
+                            <h5>${author.name ? author.name : 'Not Found'}</h5>
+                            <p><small>${author.published_date}</small></p>
+                            </div>
+                        </div>
+                        <div className="views pt-3">
+                        <h4>View: ${total_view ? total_view : 'Not Found'}</h4>
+                        </div>
+                        <div className="rating pt-3">
+                        <p>Rating: ${rating.number}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+    `
+
+
+};
 
 
 

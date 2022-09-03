@@ -13,6 +13,10 @@ body {
     color: #858585;
 }
 
+.card {
+    cursor: pointer;
+}
+
 .card figure {
     flex: 0 0 27%;
 }
