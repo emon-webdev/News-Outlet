@@ -46,14 +46,9 @@ const displayNews = (newsInfos) => {
     const totalNews = document.getElementById('total-news');
     totalNews.innerHTML = `
     <p" class="text-[18px] font-[500]">
-   ${newsInfos.length}
+    ${newsInfos.length >1 ? newsInfos.length + ' news found ' : 'news not found'}
      </p>
     `
-
-
-
-
-    // ${newsInfos.length >1 ? newsInfos.length + ' news found ' : 'news not found'}
 
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
