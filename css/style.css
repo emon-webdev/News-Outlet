@@ -2,15 +2,20 @@ body {
     font-family: 'Roboto';
     font-style: normal;
     box-sizing: border-box;
+    max-width: 1200px;
 }
 
 .li-list button {
-    padding: 5px 10px;
+    padding: 10px 12px;
     cursor: pointer;
-    font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 21px;
-    color: #858585;
+    width: 100%;
+    margin-bottom: 5px;
+    background: #ddd;
+    color: #333;
+    font-weight: 500;
+    border-radius: 5px;
 }
 
 .card {
@@ -25,4 +30,25 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 10px;
+}
+
+div#modal-body .card-body {
+    padding: 0;
+    box-shadow: #fff;
+}
+
+.inner-body.mt-4.mb-4>img {
+    width: 90%;
+    height: 300px !important;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+/* SM Small Device :320px. */
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    /* div#modal-body .card-body {
+        padding: 0;
+        box-shadow: #fff;
+    } */
 }

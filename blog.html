@@ -14,27 +14,17 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body>
+<body class="w-11/12 mx-auto">
     <header>
         <div class="navbar bg-base-100">
             <div class="flex-1">
-                <a class="btn btn-ghost normal-case text-xl">News </a>
-                <a class="btn btn-ghost normal-case text-xl"> Outlet</a>
+                <a href="index.html" class="btn btn-ghost normal-case text-xl">NewsOutlet </a>
             </div>
             <div class="flex-none">
                 <div class="dropdown dropdown-end">
                     <div class="flex-1">
                         <a href="index.html" class="btn btn-ghost normal-case text-xl">Home </a>
                         <a href="blog.html" class="btn btn-ghost normal-case text-xl">Blog</a>
-                    </div>
-                    <div tabindex="0" class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
-                        <div class="card-body">
-                            <span class="font-bold text-lg">8 Items</span>
-                            <span class="text-info">Subtotal: $999</span>
-                            <div class="card-actions">
-                                <button class="btn btn-primary btn-block">View cart</button>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="dropdown dropdown-end">
@@ -61,10 +51,50 @@
 
     <main>
         <section>
-            1. what are deffrent var, let ,const ?
-            2.arrow function and regulaer function deffrent?
-            3. map, forEach, filtter , find deffrent?
-            4. why we template using?
+            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+                <div class="collapse-title text-xl font-medium">
+                    What is difference between var, let and const in JavaScript?
+                </div>
+                <div class="collapse-content">
+                    <p>Variables declared with var are function scoped, in contrast to variables declared with let or
+                        const which are block scoped.</p>
+                </div>
+            </div>
+            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+                <div class="collapse-title text-xl font-medium">
+                    What is differences Between Arrow and Regular Functions ?
+                </div>
+                <div class="collapse-content">
+                    <p>1. The arrow functions are only callable and not constructible</p>
+                    <p>2. Regular functions created using function declarations or expressions are constructible and
+                        callable.</p>
+                </div>
+            </div>
+            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+                <div class="collapse-title text-xl font-medium">
+                    .forEach(), .map(), .filter(), .find() .... What's the difference?
+                </div>
+                <div class="collapse-content">
+                    <p>1. forEach: Foreach takes a callback function and run that callback function on each element of
+                        array one by one.</p>
+                    <p>2. Filter: The main difference between forEach and filter is that forEach just loop over the
+                        array
+                        and executes the callback but filter executes the callback and check its return value.</p>
+                    <p>3. Map: Map like filter & foreach takes a callback and run it against every element on the array
+                        but
+                        whats makes it unique is it generate a new array based on your existing array.</p>
+                    <p>4. find: The find() method returns the first element in the provided array that satisfies the
+                        provided testing function. </p>
+                </div>
+            </div>
+            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+                <div class="collapse-title text-xl font-medium">
+                    Why do we use template string in Javascript?
+                </div>
+                <div class="collapse-content">
+                    <p>Template strings are a powerful feature of modern JavaScript released in ES6. </p>
+                </div>
+            </div>
         </section>
     </main>
 </body>

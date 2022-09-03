@@ -11,6 +11,8 @@ const loadNewsCategory = async () => {
 
 
 const displayNewsCategory = (newsCategory) => {
+    console.log(newsCategory)
+
     //start spinner
     toggleSpinner(true)
 
@@ -42,49 +44,59 @@ const loadSingeNews = async (categoryId) => {
 
 
 const displayNews = (newsInfos) => {
+    //try to sort
+    console.log(newsInfos)
+    newsInfos.forEach(newsInfo => {
+        console.log(newsInfo.total_view)
 
+    })
+
+    //spinner
+    toggleSpinner(true)
+    // news length show ui
     const totalNews = document.getElementById('total-news');
     totalNews.innerHTML = `
     <p" class="text-[18px] font-[500]">
-    ${newsInfos.length >1 ? newsInfos.length + ' news found ' : 'news not found'}
+    ${newsInfos.length > 1 ? newsInfos.length + ' News Found ' : 'No News Found'}
      </p>
     `
-
+    
+    // show news
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
-        newsInfos.forEach(newsInfo => {
-            const { thumbnail_url, _id, title, details, author, total_view, rating } = newsInfo;
-            const div = document.createElement('div');
-            div.innerHTML = `
-                <div class="card card-side items-center bg-base-100 shadow-xl mt-4 mb-4">
+    newsInfos.forEach(newsInfo => {
+        const { thumbnail_url, _id, title, details, author, total_view, rating } = newsInfo;
+        const div = document.createElement('div');
+        div.innerHTML = `
+                <div class="card md:card-side items-center bg-base-100 shadow-xl mt-4 mb-8">
                     <figure><img src=${thumbnail_url} alt="Movie"></figure>
                     <div class="card-body">
                         <h2 class="card-title">${title}</h2>
                         <p>${details.slice(0, 300)} ...</p>
-                        <div class="card-footer flex items-center justify-between pt-3">
+                        <div class="card-footer lg:flex items-center justify-between pt-3">
                             <div class="author flex items-center">
                                 <img class="w-[40px] h-[40px] rounded-full mr-2.5" src=${author.img} alt="Movie">
                                 <div>
-                                <h5>${author.name ? author.name : 'Not Found'}</h5>
-                                <p><small>${author.published_date}</small></p>
+                                <h5 class="mb-3">${author.name ? author.name : 'Not Found'}</h5>
+                                <p class="mb-3"><small>${author.published_date}</small></p>
                                 </div>
                             </div>
-                            <div className="views">
+                            <div class="views mb-3">
                             <h4>View: ${total_view ? total_view : 'Not Found'}</h4>
                             </div>
-                            <div className="rating">
+                            <div class="rating mb-3">
                             <p>Rating: ${rating.number}</p>
                             </div>
-                            <label onclick="showNewsDetails('${_id}')" for="my-modal-3" class="btn btn-primary modal-button">View Details</label>
+                            <label onclick="showNewsDetails('${_id}')" for="my-modal-3" class="btn btn-primary modal-button ml-3">View Details</label>
                         </div>
                         
                     </div>
                 </div>
             `
-            newsContainer.appendChild(div)
-        })
-        // step loader
-        toggleSpinner(false)
+        newsContainer.appendChild(div)
+    })
+    // step loader
+    toggleSpinner(false)
 };
 
 
@@ -101,17 +113,14 @@ const showNewsDetails = async (newsId) => {
     }
 };
 
-// show nes details info on ui/display
+// show news details info on ui/display
 const NewsDetailsModal = (newsDetail) => {
     const { thumbnail_url, title, details, author, total_view, rating } = newsDetail;
-
     const modalBody = document.getElementById('modal-body');
-    console.log(newsDetail)
     modalBody.innerHTML = `
-        <div class="card card-side items-center bg-base-100 shadow-xl mt-4 mb-4">
-                <div class="card-body">
-                <h2 class="card-title">${title}</h2>
-                <figure><img class="detail-img" src=${thumbnail_url} alt="Movie"></figure>
+        <div class="inner-body mt-4 mb-4">
+                <img class="detail-img" src=${thumbnail_url} alt="Movie">
+                <h2 class="card-title">${title}</h2>S
                     <p>${details.slice(0, 300)} ...</p>
                     <div class="card-footer pt-3">
                         <div class="author flex items-center">
@@ -128,22 +137,21 @@ const NewsDetailsModal = (newsDetail) => {
                         <p>Rating: ${rating.number}</p>
                         </div>
                     </div>
-                </div>
             </div>
     `
     toggleSpinner(false)
 
 };
 
-
+//spinner function
 const toggleSpinner = (isLoading) => {
     const spinnerSection = document.getElementById('spinner');
-    if(isLoading){
+    if (isLoading) {
         spinnerSection.classList.remove('hidden')
-    }else{
+    } else {
         spinnerSection.classList.add('hidden')
     }
-    
+
 };
 
 
