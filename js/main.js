@@ -11,7 +11,6 @@ const loadNewsCategory = async () => {
 
 
 const displayNewsCategory = (newsCategory) => {
-    console.log(newsCategory)
 
     //start spinner
     toggleSpinner(true)
@@ -44,12 +43,12 @@ const loadSingeNews = async (categoryId) => {
 
 
 const displayNews = (newsInfos) => {
-    //try to sort
-    console.log(newsInfos)
-    newsInfos.forEach(newsInfo => {
-        console.log(newsInfo.total_view)
-
-    })
+    //sort
+    newsInfos.sort(function (a, b) {
+        console.log(a, b)
+        
+        return b.total_view - a.total_view;
+    });
 
     //spinner
     toggleSpinner(true)
@@ -60,7 +59,7 @@ const displayNews = (newsInfos) => {
     ${newsInfos.length > 1 ? newsInfos.length + ' News Found ' : 'No News Found'}
      </p>
     `
-    
+
     // show news
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
