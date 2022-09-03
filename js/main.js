@@ -12,14 +12,14 @@ const loadNewsCategory = async () => {
 
 const displayNewsCategory = (newsCategory) => {
     const menuCategory = document.getElementById('menu-category');
-
+    loadSingeNews(newsCategory[7].category_id)
     newsCategory.forEach(newsCategoryName => {
         // console.log(newsItem)
         const li = document.createElement('li');
         li.classList.add('li-list')
         li.innerHTML = `
-            <a onclick="loadSingeNews('${newsCategoryName.category_id}')"
-             class="">${newsCategoryName.category_name}</a>
+            <button onclick="loadSingeNews('${newsCategoryName.category_id}')"
+             class="">${newsCategoryName.category_name}</button>
         `
         menuCategory.appendChild(li)
     })
@@ -38,14 +38,20 @@ const loadSingeNews = async (categoryId) => {
 };
 
 
-const displayNews = (newsInfos) => {
+const displayNews = (newsInfos ) => {
+    
     const totalNews = document.getElementById('total-news');
     totalNews.innerHTML = `
-    <p" class="text-[18px] font-[500]">${newsInfos.length} items found for category Entertainment</p>
+    <p" class="text-[18px] font-[500]">
+   ${ newsInfos.length }
+     </p>
     `
     
-    console.log()
+
+
     
+    // ${newsInfos.length >1 ? newsInfos.length + ' news found ' : 'news not found'}
+
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
     newsInfos.forEach(newsInfo => {
@@ -71,8 +77,7 @@ const displayNews = (newsInfos) => {
                         <div className="rating">
                         <p>Rating: ${rating.number}</p>
                         </div>
-                        <label onclick="showNewsDetails('${_id}')" for="my-modal-3" class="btn btn-primary modal-button">See Details</label>
-                        
+                        <label onclick="showNewsDetails('${_id}')" for="my-modal-3" class="btn btn-primary modal-button">View Details</label>
                     </div>
                     
                 </div>
@@ -97,7 +102,7 @@ const showNewsDetails = async (newsId) => {
 
 // show nes details info on ui/display
 const NewsDetailsModal = (newsDetail) => {
-    const { thumbnail_url, _id, title, details, author, total_view, rating } = newsDetail;
+    const { thumbnail_url, title, details, author, total_view, rating } = newsDetail;
 
     const modalBody = document.getElementById('modal-body');
     console.log(newsDetail)

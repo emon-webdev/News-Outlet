@@ -4,7 +4,7 @@ body {
     box-sizing: border-box;
 }
 
-.li-list a {
+.li-list button {
     padding: 5px 10px;
     cursor: pointer;
     font-weight: 400;
