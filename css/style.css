@@ -47,8 +47,7 @@ div#modal-body .card-body {
 
 /* SM Small Device :320px. */
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-    /* div#modal-body .card-body {
-        padding: 0;
-        box-shadow: #fff;
-    } */
+    .card figure {
+        width: 100%;
+    }
 }

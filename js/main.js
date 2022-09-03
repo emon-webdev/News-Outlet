@@ -1,4 +1,6 @@
 const loadNewsCategory = async () => {
+      //start spinner
+    toggleSpinner(true)
     const url = `https://openapi.programming-hero.com/api/news/categories`;
     try {
         const res = await fetch(url);
@@ -12,8 +14,6 @@ const loadNewsCategory = async () => {
 
 const displayNewsCategory = (newsCategory) => {
 
-    //start spinner
-    toggleSpinner(true)
 
     const menuCategory = document.getElementById('menu-category');
     loadSingeNews(newsCategory[7].category_id)
@@ -31,6 +31,7 @@ const displayNewsCategory = (newsCategory) => {
 
 
 const loadSingeNews = async (categoryId) => {
+    toggleSpinner(true)
     const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`;
     try {
         const res = await fetch(url);
@@ -45,8 +46,6 @@ const loadSingeNews = async (categoryId) => {
 const displayNews = (newsInfos) => {
     //sort
     newsInfos.sort(function (a, b) {
-        console.log(a, b)
-        
         return b.total_view - a.total_view;
     });
 
