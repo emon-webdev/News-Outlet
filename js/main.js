@@ -38,53 +38,55 @@ const loadSingeNews = async (categoryId) => {
 };
 
 
-const displayNews = (newsInfos ) => {
-    
+const displayNews = (newsInfos) => {
+
     const totalNews = document.getElementById('total-news');
     totalNews.innerHTML = `
     <p" class="text-[18px] font-[500]">
-   ${ newsInfos.length }
+   ${newsInfos.length}
      </p>
     `
-    
 
 
-    
+
+
     // ${newsInfos.length >1 ? newsInfos.length + ' news found ' : 'news not found'}
 
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
-    newsInfos.forEach(newsInfo => {
-        const { thumbnail_url, _id, title, details, author, total_view, rating } = newsInfo;
-        const div = document.createElement('div');
-        div.innerHTML = `
-            <div class="card card-side items-center bg-base-100 shadow-xl mt-4 mb-4">
-                <figure><img src=${thumbnail_url} alt="Movie"></figure>
-                <div class="card-body">
-                    <h2 class="card-title">${title}</h2>
-                    <p>${details.slice(0, 300)} ...</p>
-                    <div class="card-footer flex items-center justify-between pt-3">
-                        <div class="author flex items-center">
-                            <img class="w-[40px] h-[40px] rounded-full mr-2.5" src=${author.img} alt="Movie">
-                            <div>
-                            <h5>${author.name ? author.name : 'Not Found'}</h5>
-                            <p><small>${author.published_date}</small></p>
+        newsInfos.forEach(newsInfo => {
+            const { thumbnail_url, _id, title, details, author, total_view, rating } = newsInfo;
+            const div = document.createElement('div');
+            div.innerHTML = `
+                <div class="card card-side items-center bg-base-100 shadow-xl mt-4 mb-4">
+                    <figure><img src=${thumbnail_url} alt="Movie"></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">${title}</h2>
+                        <p>${details.slice(0, 300)} ...</p>
+                        <div class="card-footer flex items-center justify-between pt-3">
+                            <div class="author flex items-center">
+                                <img class="w-[40px] h-[40px] rounded-full mr-2.5" src=${author.img} alt="Movie">
+                                <div>
+                                <h5>${author.name ? author.name : 'Not Found'}</h5>
+                                <p><small>${author.published_date}</small></p>
+                                </div>
                             </div>
+                            <div className="views">
+                            <h4>View: ${total_view ? total_view : 'Not Found'}</h4>
+                            </div>
+                            <div className="rating">
+                            <p>Rating: ${rating.number}</p>
+                            </div>
+                            <label onclick="showNewsDetails('${_id}')" for="my-modal-3" class="btn btn-primary modal-button">View Details</label>
                         </div>
-                        <div className="views">
-                        <h4>View: ${total_view ? total_view : 'Not Found'}</h4>
-                        </div>
-                        <div className="rating">
-                        <p>Rating: ${rating.number}</p>
-                        </div>
-                        <label onclick="showNewsDetails('${_id}')" for="my-modal-3" class="btn btn-primary modal-button">View Details</label>
+                        
                     </div>
-                    
                 </div>
-            </div>
-        `
-        newsContainer.appendChild(div)
-    })
+            `
+            newsContainer.appendChild(div)
+        })
+        // step loader
+
 };
 
 
@@ -127,7 +129,6 @@ const NewsDetailsModal = (newsDetail) => {
                         <p>Rating: ${rating.number}</p>
                         </div>
                     </div>
-                    
                 </div>
             </div>
     `
